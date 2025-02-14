@@ -1,4 +1,5 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { Link } from "react-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 const MyNav = () => {
@@ -13,12 +14,16 @@ const MyNav = () => {
 
         <Navbar.Collapse id="navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/" className="text-dark">
-              Home
-            </Nav.Link>
-            <Nav.Link href="/weather" className="text-dark">
-              Forecast
-            </Nav.Link>
+            <Nav.Item>
+              <Link to="/" className="nav-link text-dark">
+                Home
+              </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Link to="/forecast" className="nav-link text-dark">
+                Forecast
+              </Link>
+            </Nav.Item>
           </Nav>
 
           <Nav className="ms-auto align-items-center">
