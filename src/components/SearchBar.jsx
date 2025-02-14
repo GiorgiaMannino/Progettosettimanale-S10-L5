@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const SearchBar = ({ changeCity }) => {
   const [city, setCity] = useState("");
+  const navigate = useNavigate();
 
   const fetchWeather = async () => {
     if (!city) return;
@@ -26,6 +28,7 @@ const SearchBar = ({ changeCity }) => {
           lon,
           weather: currentWeather,
         });
+        navigate("/detail", { state: { city, lat, lon } });
       } else {
         console.error("città non presente");
       }
