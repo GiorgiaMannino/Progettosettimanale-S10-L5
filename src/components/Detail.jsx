@@ -56,7 +56,7 @@ const Detail = () => {
               <ListGroup variant="flush">
                 {forecast.slice(0, 5).map((day, i) => (
                   <ListGroup.Item key={i} className="rounded bg-transparent border-0">
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center pt-4">
                       <img
                         src={getWeatherIcon(day.weather[0].icon)}
                         alt={day.weather[0].description}
@@ -79,15 +79,21 @@ const Detail = () => {
       </Row>
       <Row>
         <Col className="second-col mt-5 mb-5 p-4">
-          <h5 className="text-center text-white">More details:</h5>
+          <h5 className="text-center text-white fw-bold">More details:</h5>
           <div className="d-flex justify-content-center">
             <div className="d-flex align-items-center me-3">
-              <i className="bi bi-droplet me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
-              <Card.Text className="text-white mb-0">{weather.main?.humidity}%</Card.Text>
+              <i className="bi bi-droplet" style={{ fontSize: "2rem", color: "white" }}></i>
+              <div className="ms-2">
+                <Card.Text className="text-white mb-0">Humidity</Card.Text>
+                <Card.Text className="text-white mb-0">{weather.main?.humidity}%</Card.Text>
+              </div>
             </div>
             <div className="d-flex align-items-center">
-              <i className="bi bi-wind me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
-              <Card.Text className="text-white mb-0">{weather.wind?.speed} km/h</Card.Text>
+              <i className="bi bi-wind" style={{ fontSize: "2rem", color: "white" }}></i>
+              <div className="ms-2">
+                <Card.Text className="text-white mb-0">Wind Speed</Card.Text>
+                <Card.Text className="text-white mb-0">{weather.wind?.speed} km/h</Card.Text>
+              </div>
             </div>
           </div>
         </Col>
