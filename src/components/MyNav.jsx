@@ -19,11 +19,6 @@ const MyNav = () => {
                 Home
               </Link>
             </Nav.Item>
-            <Nav.Item>
-              <Link to="/forecast" className="nav-link text-dark">
-                Forecast
-              </Link>
-            </Nav.Item>
           </Nav>
 
           <Nav className="ms-auto align-items-center">
