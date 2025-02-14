@@ -1,0 +1,10 @@
+body {
+  background: linear-gradient(to right, #acc2ff, #a3d4ff);
+  color: white;
+}
+
+.navbar {
+  background-color: white;
+  border: none;
+  color: white;
+}

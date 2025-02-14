@@ -7,12 +7,16 @@ import Detail from "./components/Detail";
 const App = () => {
   return (
     <BrowserRouter>
-      <MyNav />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/detail" element={<Detail />} />
-      </Routes>
-      <MyFooter />
+      <div className="d-flex flex-column min-vh-100">
+        <MyNav />
+        <div className="flex-grow-1">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/detail" element={<Detail />} />
+          </Routes>
+        </div>
+        <MyFooter />
+      </div>
     </BrowserRouter>
   );
 };
