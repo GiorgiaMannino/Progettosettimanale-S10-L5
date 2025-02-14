@@ -13,29 +13,43 @@ const SearchBar = ({ changeCity }) => {
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=bb5d1147afc96159e576456b97bf104c`
       );
       const [location] = await response.json();
+      console.log("Location:", location);
 
       if (location) {
         const { lat, lon } = location;
 
-        const weatherCity = await fetch(
+        // dati giornata corrente
+        const weatherCityResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
         );
-        const currentWeather = await weatherCity.json();
+        const weatherCity = await weatherCityResponse.json();
+        console.log("weatherCity:", weatherCity);
+
+        // dati dei prossimi giorni
+        const forecastCityResponse = await fetch(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
+        );
+        const forecast = await forecastCityResponse.json();
+        console.log("Forecast:", forecast);
 
         changeCity({
           city,
           lat,
           lon,
-          weather: currentWeather,
+          weather: weatherCity,
+          forecast: forecast.list,
         });
-        navigate("/detail", { state: { city, lat, lon } });
+        navigate("/detail", {
+          state: { city, lat, lon, weather: weatherCity, forecast: forecast.list },
+        });
       } else {
-        console.error("città non presente");
+        console.error("Città non presente");
       }
     } catch (error) {
-      console.error("errore", error);
+      console.error("Errore", error);
     }
   };
+
   return (
     <div style={{ position: "relative" }}>
       <Form.Control
