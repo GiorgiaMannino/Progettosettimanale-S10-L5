@@ -8,3 +8,8 @@ body {
   border: none;
   color: white;
 }
+
+.second-col {
+  background-color: #8ca9f85e;
+  border-radius: 18px;
+}

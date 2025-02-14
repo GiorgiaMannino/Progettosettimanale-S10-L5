@@ -46,24 +46,13 @@ const Detail = () => {
                   <Card.Text className="text-white">{weather.weather?.[0]?.description}</Card.Text>
                 </div>
               </div>
-              <h5 className="text-center text-white">More details:</h5>
-              <div className="d-flex justify-content-center">
-                <div className="d-flex align-items-center me-3">
-                  <i className="bi bi-droplet me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
-                  <Card.Text className="text-white mb-0">{weather.main?.humidity}%</Card.Text>
-                </div>
-                <div className="d-flex align-items-center">
-                  <i className="bi bi-wind me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
-                  <Card.Text className="text-white mb-0">{weather.wind?.speed} km/h</Card.Text>
-                </div>
-              </div>
             </Card.Body>
           </Card>
         </Col>
-        <Col sm={12} md={6}>
+        <Col sm={12} md={6} className="second-col mt-5 mb-5 p-4">
           <Card className="mb-4 rounded bg-transparent border-0">
             <Card.Body>
-              <Card.Title className="text-center text-white mb-4">Forecast for the Next 5 Days</Card.Title>
+              <Card.Title className="text-center text-white mb-4 fw-bold">Forecast for the Next 5 Days</Card.Title>
               <ListGroup variant="flush">
                 {forecast.slice(0, 5).map((day, i) => (
                   <ListGroup.Item key={i} className="rounded bg-transparent border-0">
@@ -86,6 +75,21 @@ const Detail = () => {
               </ListGroup>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="second-col mt-5 mb-5 p-4">
+          <h5 className="text-center text-white">More details:</h5>
+          <div className="d-flex justify-content-center">
+            <div className="d-flex align-items-center me-3">
+              <i className="bi bi-droplet me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
+              <Card.Text className="text-white mb-0">{weather.main?.humidity}%</Card.Text>
+            </div>
+            <div className="d-flex align-items-center">
+              <i className="bi bi-wind me-2" style={{ fontSize: "1.5rem", color: "white" }}></i>
+              <Card.Text className="text-white mb-0">{weather.wind?.speed} km/h</Card.Text>
+            </div>
+          </div>
         </Col>
       </Row>
     </Container>
