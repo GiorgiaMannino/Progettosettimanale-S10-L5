@@ -6,7 +6,7 @@ const MyNav = () => {
     <Container>
       <Navbar expand="lg" className="bg-light text-dark">
         <Navbar.Brand href="#">
-          <img height="40" src="./src/assets/weather_logo.png" alt="Weather Logo" />
+          <img height="40" src="https://cdn-icons-png.freepik.com/512/234/234336.png" alt="SkyWeather Logo" />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
