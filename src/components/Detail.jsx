@@ -8,15 +8,25 @@ const Detail = () => {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState({});
   const [forecast, setForecast] = useState([]);
+  const [currentDate, setCurrentDate] = useState("");
 
   useEffect(() => {
-    if (location.state) {
+    if (location.state && location.state.city && location.state.weather && location.state.forecast) {
       const { city, weather, forecast } = location.state;
       setCity(city);
       setWeather(weather);
       setForecast(forecast);
     }
   }, [location.state]);
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const date = new Date();
+      setCurrentDate(date.toLocaleDateString());
+    }, 1000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const getWeatherIcon = (iconCode) => {
     return `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -28,27 +38,92 @@ const Detail = () => {
         <Col sm={12} md={6}>
           <Card className="text-center bg-transparent border-0">
             <Card.Body>
-              <Card.Title className="mt-4 mb-0 text-white" style={{ fontSize: "3rem" }}>
-                {city}
+              <Card.Text className="text-white ">Today, {currentDate}</Card.Text>
+              <Card.Title className=" mb-0 text-white" style={{ fontSize: "3rem" }}>
+                <span className="fw-light">Now in</span> <span className="fw-bold">{city}</span>
               </Card.Title>
 
+              <Card.Text className="text-white">{weather.weather?.[0]?.description || "No data available"}</Card.Text>
+
               <div className="d-flex justify-content-center align-items-center">
+                <div className="text-center">
+                  <Card.Text className="text-white mb-0 me-3 fw-semibold" style={{ fontSize: "5rem" }}>
+                    {Math.round(weather.main?.temp || 0)}
+                    <sup style={{ fontSize: "2rem", verticalAlign: "super" }}>°C</sup>
+                  </Card.Text>
+                </div>
                 <img
-                  src={getWeatherIcon(weather.weather?.[0]?.icon)}
-                  alt={weather.weather?.[0]?.description}
+                  src={getWeatherIcon(weather.weather?.[0]?.icon || "01d")}
+                  alt={weather.weather?.[0]?.description || "No data"}
                   width="160"
                   className="me-2"
                 />
-                <div className="text-center">
-                  <Card.Text className="text-white mb-0" style={{ fontSize: "2rem" }}>
-                    {Math.round(weather.main?.temp)} °C
-                  </Card.Text>
-                  <Card.Text className="text-white">{weather.weather?.[0]?.description}</Card.Text>
-                </div>
               </div>
             </Card.Body>
           </Card>
         </Col>
+
+        <Row>
+          <Col className="mt-5 mb-5">
+            <hr className="text-white" />
+            <h5 className="text-white fw-bold mb-4">More details:</h5>
+            <div className="d-flex flex-wrap justify-content-center gap-4">
+              <Card
+                xs={12}
+                sm={6}
+                md={3}
+                className="text-white border-0 mb-3"
+                style={{ backgroundColor: "rgba(0, 4, 255, 0.07)", width: "250px" }}
+              >
+                <Card.Body className="d-flex flex-column align-items-start">
+                  <i className="bi bi-droplet mb-3" style={{ fontSize: "1.6rem", color: "white" }}></i>
+                  <Card.Text className="text-white mb-0">Humidity</Card.Text>
+                  <Card.Text className="text-white mb-0">{weather.main?.humidity || "N/A"}%</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card
+                xs={12}
+                sm={6}
+                md={3}
+                className="text-white border-0 mb-3"
+                style={{ backgroundColor: "rgba(0, 4, 255, 0.07)", width: "250px" }}
+              >
+                <Card.Body className="d-flex flex-column align-items-start">
+                  <i className="bi bi-wind mb-3" style={{ fontSize: "1.6rem", color: "white" }}></i>
+                  <Card.Text className="text-white mb-0">Wind Speed</Card.Text>
+                  <Card.Text className="text-white mb-0">{weather.wind?.speed || "N/A"} km/h</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card
+                xs={12}
+                sm={6}
+                md={3}
+                className="text-white border-0 mb-3"
+                style={{ backgroundColor: "rgba(0, 4, 255, 0.07)", width: "250px" }}
+              >
+                <Card.Body className="d-flex flex-column align-items-start">
+                  <i className="bi bi-thermometer-half mb-3" style={{ fontSize: "1.6rem" }}></i>{" "}
+                  <Card.Text className="text-white mb-0">Min Temperature</Card.Text>
+                  <Card.Text className="text-white mb-0">{Math.round(weather.main?.temp_min || 0)}°C</Card.Text>
+                </Card.Body>
+              </Card>
+              <Card
+                xs={12}
+                sm={6}
+                md={3}
+                className="text-white border-0 mb-3"
+                style={{ backgroundColor: "rgba(0, 4, 255, 0.07)", width: "250px" }}
+              >
+                <Card.Body className="d-flex flex-column align-items-start">
+                  <i className="bi bi-thermometer-sun mb-3" style={{ fontSize: "1.6rem" }}></i>{" "}
+                  <Card.Text className="text-white mb-0">Max Temperature</Card.Text>
+                  <Card.Text className="text-white mb-0">{Math.round(weather.main?.temp_max || 0)}°C</Card.Text>
+                </Card.Body>
+              </Card>
+            </div>
+          </Col>
+        </Row>
+
         <Col sm={12} md={6} className="second-col mt-5 mb-5 p-4">
           <Card className="mb-4 rounded bg-transparent border-0">
             <Card.Body>
@@ -75,27 +150,6 @@ const Detail = () => {
               </ListGroup>
             </Card.Body>
           </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="second-col mt-5 mb-5 p-4">
-          <h5 className="text-center text-white fw-bold">More details:</h5>
-          <div className="d-flex justify-content-center">
-            <div className="d-flex align-items-center me-3">
-              <i className="bi bi-droplet" style={{ fontSize: "2rem", color: "white" }}></i>
-              <div className="ms-2">
-                <Card.Text className="text-white mb-0">Humidity</Card.Text>
-                <Card.Text className="text-white mb-0">{weather.main?.humidity}%</Card.Text>
-              </div>
-            </div>
-            <div className="d-flex align-items-center">
-              <i className="bi bi-wind" style={{ fontSize: "2rem", color: "white" }}></i>
-              <div className="ms-2">
-                <Card.Text className="text-white mb-0">Wind Speed</Card.Text>
-                <Card.Text className="text-white mb-0">{weather.wind?.speed} km/h</Card.Text>
-              </div>
-            </div>
-          </div>
         </Col>
       </Row>
     </Container>
