@@ -1,31 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
-import Button from "react-bootstrap/Button";
 
 function Welcome() {
   const [show, setShow] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(false), 4300);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <Alert
-      show={show}
-      variant="primary"
-      className="mt-4"
-      style={{
-        backgroundColor: "rgba(0, 4, 255, 0.07)",
-        color: "white",
-      }}
-    >
-      <Alert.Heading>
-        Welcome to <strong> SkyWeather</strong>
-      </Alert.Heading>
-      <p>Discover the weather forecasts for your city and beyond!</p>
-      <hr />
-      <div className="d-flex justify-content-end">
-        <Button onClick={() => setShow(false)} variant="outline-light">
-          Close me
-        </Button>
-      </div>
-    </Alert>
+    show && (
+      <Alert
+        variant="primary"
+        className="mt-4"
+        style={{
+          backgroundColor: "rgba(0, 4, 255, 0.07)",
+          color: "white",
+        }}
+      >
+        <Alert.Heading>
+          Welcome to <strong>SkyWeather</strong>
+        </Alert.Heading>
+        <p>Get weather forecasts for your city and beyond! </p>
+      </Alert>
+    )
   );
 }
 

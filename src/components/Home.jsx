@@ -10,11 +10,11 @@ const Home = () => {
   return (
     <Container>
       <Welcome />
-      <h1 className="mt-5 mb-3 text-white fs-1">SkyWeather</h1>
+      <h1 className="mt-5 mb-5 text-white fs-1">SkyWeather</h1>
       <SearchBar changeCity={searchCity} />
 
       <Row className="mt-5 mb-5">
-        <hr className="mt-2 text-white" />
+        <hr className="text-white mt-4 " />
         <h4 className="text-white mb-4">Latest news</h4>
 
         <Col sm={12} md={4} className="mb-4">
@@ -30,11 +30,11 @@ const Home = () => {
               variant="top"
               src="https://www.meteo.expert/wp-content/uploads/2018/11/iStock_000028466382_Medium.jpg"
               alt="News 1"
-              className="rounded img-fluid"
+              className="rounded img-fluid "
               style={{ height: "200px", objectFit: "cover" }}
             />
             <Card.Body className="news-card-body d-flex flex-column justify-content-between" style={{ flexGrow: 1 }}>
-              <Card.Title className="text-white fs-4">News 1</Card.Title>
+              <Card.Title className="text-white fs-4 ">News 1</Card.Title>
               <Card.Text className="text-white fs-6">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quidem nobis vitae nostrum? Numquam aut ab
                 ipsa!

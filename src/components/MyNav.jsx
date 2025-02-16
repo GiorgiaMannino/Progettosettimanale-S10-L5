@@ -8,7 +8,7 @@ const MyNav = () => {
       <Container>
         <Navbar
           expand="lg"
-          className="navbar d-none d-lg-block w-100"
+          className="navbar d-none d-lg-block w-100 p-2"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.815)" }}
         >
           <Navbar.Toggle aria-controls="navbar-nav" />
@@ -36,7 +36,7 @@ const MyNav = () => {
 
       {/* Navbar visibile solo sul formato mobile */}
       <div
-        className="d-block d-lg-none position-fixed bottom-0 w-100"
+        className="d-block d-lg-none position-fixed bottom-0 w-100 p-2"
         style={{
           zIndex: 9999,
           backgroundColor: "rgba(3, 6, 20, 0.81)",

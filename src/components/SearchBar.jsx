@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { InputGroup, FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import Error from "./Error";
 
 const SearchBar = ({ changeCity }) => {
   const [city, setCity] = useState("");
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   const fetchWeather = async () => {
@@ -12,25 +14,24 @@ const SearchBar = ({ changeCity }) => {
       const response = await fetch(
         `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=bb5d1147afc96159e576456b97bf104c`
       );
-      const [location] = await response.json();
-      console.log("Location:", location);
+      const locationData = await response.json();
 
-      if (location) {
-        const { lat, lon } = location;
+      console.log("LocationData:", locationData);
+
+      if (locationData.length > 0) {
+        const { lat, lon } = locationData[0];
 
         // Dati giornata corrente
         const weatherCityResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
         );
         const weatherCity = await weatherCityResponse.json();
-        console.log("weatherCity:", weatherCity);
 
         // Dati dei prossimi giorni
         const forecastCityResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
         );
         const forecast = await forecastCityResponse.json();
-        console.log("Forecast:", forecast);
 
         changeCity({
           city,
@@ -39,20 +40,26 @@ const SearchBar = ({ changeCity }) => {
           weather: weatherCity,
           forecast: forecast.list,
         });
+
         navigate("/detail", {
           state: { city, lat, lon, weather: weatherCity, forecast: forecast.list },
         });
+
+        setShowError(false);
       } else {
         console.error("Città non presente");
+        setShowError(true);
       }
     } catch (error) {
       console.error("Errore", error);
+      setShowError(true);
     }
   };
 
   return (
     <div style={{ position: "relative" }}>
-      <h4 className="mb-4 text-white text-center">Pick Location</h4>
+      <h4 className="mb-4 text-white text-center">Pick location</h4>
+      {showError && <Error />}
       <InputGroup className="mt-4 cardhover">
         <InputGroup.Text
           style={{

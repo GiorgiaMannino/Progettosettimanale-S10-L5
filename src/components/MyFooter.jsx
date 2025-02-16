@@ -3,7 +3,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 const Footer = () => {
   return (
-    <footer className="py-4   d-none d-lg-block w-100" style={{ backgroundColor: "rgba(3, 6, 20, 0.81)" }}>
+    <footer className="py-4  mt-5 d-none d-lg-block w-100" style={{ backgroundColor: "rgba(3, 6, 20, 0.81)" }}>
       <Container>
         <Row className="justify-content-center">
           <Col xs={12} md={6} className="text-center">

@@ -44,13 +44,13 @@ const Detail = () => {
           <Card className="text-center bg-transparent border-0">
             <Card.Body>
               <Card.Text className="text-white fs-5">Today, {currentDate}</Card.Text>
-              <Card.Title className="mb-0 text-white fs-3">
+              <Card.Title className=" text-white fs-3">
                 <span className="fw-light">Now in</span> <span className="fw-bold">{city}</span>
               </Card.Title>
 
               <div className="d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <Card.Text className="text-white mb-0 me-3 fw-semibold" style={{ fontSize: "7rem" }}>
+                  <Card.Text className="text-white  me-3 fw-semibold" style={{ fontSize: "7rem" }}>
                     {Math.round(weather.main?.temp)}
                     <sup style={{ fontSize: "2rem", verticalAlign: "super" }}>°C</sup>
                   </Card.Text>
@@ -64,7 +64,7 @@ const Detail = () => {
               </div>
 
               <Card.Text
-                className="text-white p-2 mb-5 fs-5 cardhover"
+                className="text-white p-2 mb-5 fs-5 "
                 style={{
                   backgroundColor: "rgba(0, 4, 255, 0.07)",
                 }}
@@ -81,7 +81,7 @@ const Detail = () => {
 
       <Row>
         <Col>
-          <hr className="text-white" />
+          <hr className="text-white mt-5" />
           <h5 className="text-white fw-bold mb-5">More details, {currentDate}</h5>
           <div className="d-flex flex-wrap justify-content-center gap-4">
             <Card
@@ -109,8 +109,8 @@ const Detail = () => {
             >
               <Card.Body className="d-flex flex-column align-items-start">
                 <i className="bi bi-thermometer-sun mb-3 fs-4" style={{ fontSize: "1.6rem" }}></i>
-                <Card.Text className="text-white mb-0 fs-6">Max Temperature</Card.Text>
-                <Card.Text className="text-white mb-0 fw-bold fs-5">
+                <Card.Text className="text-white mb-0 fs-6 ">Max Temperature</Card.Text>
+                <Card.Text className="text-white mb-0 fw-bold fs-5 ">
                   {weather.main?.temp_max && Math.round(weather.main.temp_max)}°C
                 </Card.Text>
               </Card.Body>
@@ -144,15 +144,15 @@ const Detail = () => {
               </Card.Body>
             </Card>
           </div>
-          <hr className="text-white mt-3" />
         </Col>
       </Row>
 
-      <Row>
+      <Row className="mt-5">
+        <hr className="text-white mt-5" />
         <Col sm={12} md={12} className="mb-5">
           <Card className="mb-4 rounded bg-transparent border-0 ">
             <Card.Body>
-              <Card.Title className="text-white mb-4 fw-bold fs-5">Forecast for the Next 5 Days</Card.Title>
+              <Card.Title className="text-white mb-5 fw-bold fs-5">Forecast for the Next 5 Days</Card.Title>
               <ListGroup variant="flush">
                 {forecast.slice(0, 5).map((day, i) => (
                   <ListGroup.Item
@@ -169,12 +169,12 @@ const Detail = () => {
                       />
                       <div className="flex-grow-1">
                         <h6 className="text-white mb-1 fs-6">{`Day ${i + 1}`}</h6>
-                        <p className="text-white mb-0 fs-5">
+                        <p className="text-white fs-5 fw-bold">
                           {Math.round(day.main.temp)}°C - {day.weather[0].description}
                         </p>
                       </div>
-                      <div className="text-white fw-bold">
-                        <p className="mb-0">
+                      <div className="text-white ">
+                        <p>
                           <span
                             style={{ cursor: "pointer", textDecoration: "underline" }}
                             onClick={() => toggleDetails(i)}
@@ -187,20 +187,20 @@ const Detail = () => {
 
                     {openDetails === i && (
                       <div className="mt-2" style={{ textAlign: "right" }}>
-                        <p className="text-white mb-0 fs-6">
-                          <i className="bi bi-thermometer-half mb-1" style={{ fontSize: "1.2rem" }}></i>{" "}
+                        <p className="text-white fs-6">
+                          <i className="bi bi-thermometer-half mb-1 me-2" style={{ fontSize: "1.3rem" }}></i>
                           <strong>Min:</strong> {Math.round(day.main.temp_min)}°C
                         </p>
-                        <p className="text-white mb-0 fs-6">
-                          <i className="bi bi-thermometer-sun mb-1" style={{ fontSize: "1.2rem" }}></i>{" "}
+                        <p className="text-white fs-6">
+                          <i className="bi bi-thermometer-sun mb-1 me-2" style={{ fontSize: "1.3rem" }}></i>
                           <strong>Max:</strong> {Math.round(day.main.temp_max)}°C
                         </p>
-                        <p className="text-white mb-0 fs-6">
-                          <i className="bi bi-droplet mb-1" style={{ fontSize: "1.2rem", color: "white" }}></i>{" "}
+                        <p className="text-white fs-6">
+                          <i className="bi bi-droplet mb-1 me-2" style={{ fontSize: "1.3rem", color: "white" }}></i>
                           <strong>Humidity:</strong> {day.main.humidity}%
                         </p>
-                        <p className="text-white mb-0 fs-6">
-                          <i className="bi bi-wind mb-1" style={{ fontSize: "1.2rem", color: "white" }}></i>{" "}
+                        <p className="text-white fs-6">
+                          <i className="bi bi-wind mb-1 me-2" style={{ fontSize: "1.3rem", color: "white" }}></i>
                           <strong>Wind Speed:</strong> {day.wind.speed} km/h
                         </p>
                       </div>
