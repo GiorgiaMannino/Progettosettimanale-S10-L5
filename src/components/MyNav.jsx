@@ -45,21 +45,18 @@ const MyNav = () => {
       >
         <Nav className="justify-content-around">
           <Nav.Item className="text-center">
-            <Link to="/" className="nav-link text-white d-flex flex-column align-items-center">
-              <i className="bi bi-house-door-fill me-2 fs-3"></i>
-              <span>Home</span>
+            <Link to="#" className="nav-link text-white d-flex flex-column align-items-center">
+              <i className="bi bi-bell me-2 fs-3 "></i>
             </Link>
           </Nav.Item>
           <Nav.Item className="text-center">
-            <Link to="/search" className="nav-link text-white d-flex flex-column align-items-center">
-              <i className="bi bi-search me-2 fs-3"></i>
-              <span>Cerca</span>
+            <Link to="/" className="nav-link text-white d-flex flex-column align-items-center">
+              <i className="bi bi-house  me-2 fs-3 "></i>
             </Link>
           </Nav.Item>
           <Nav.Item className="text-center">
             <Link to="#" className="nav-link text-white d-flex flex-column align-items-center">
-              <i className="bi bi-collection-fill me-2 fs-3"></i>
-              <span>La tua libreria</span>
+              <i className="bi bi-gear me-2 fs-3"></i>
             </Link>
           </Nav.Item>
         </Nav>
