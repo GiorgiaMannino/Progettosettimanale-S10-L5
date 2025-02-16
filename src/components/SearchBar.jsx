@@ -52,10 +52,11 @@ const SearchBar = ({ changeCity }) => {
 
   return (
     <div style={{ position: "relative" }}>
+      <h4 className="mb-4 text-white ">Pick Location</h4>
       <Form.Control
         className="mt-4 ps-5"
         type="text"
-        placeholder="Search for a city"
+        placeholder="Search"
         value={city}
         onChange={(e) => setCity(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && fetchWeather()}

@@ -13,3 +13,20 @@ body {
   background-color: #8ca9f85e;
   border-radius: 18px;
 }
+
+.navbar {
+  background-color: transparent !important;
+}
+
+.navbar .nav-link {
+  color: white !important;
+}
+
+.navbar .nav-link:hover {
+  color: lightgray !important;
+}
+
+.cardhover:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
