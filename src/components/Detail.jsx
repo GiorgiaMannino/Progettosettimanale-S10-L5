@@ -47,7 +47,7 @@ const Detail = () => {
 
               <div className="d-flex justify-content-center align-items-center">
                 <div className="text-center">
-                  <Card.Text className="text-white mb-0 me-3 fw-semibold" style={{ fontSize: "5rem" }}>
+                  <Card.Text className="text-white mb-0 me-3 fw-semibold" style={{ fontSize: "7rem" }}>
                     {Math.round(weather.main?.temp || 0)}
                     <sup style={{ fontSize: "2rem", verticalAlign: "super" }}>°C</sup>
                   </Card.Text>
@@ -55,7 +55,7 @@ const Detail = () => {
                 <img
                   src={getWeatherIcon(weather.weather?.[0]?.icon || "01d")}
                   alt={weather.weather?.[0]?.description || "No data"}
-                  width="160"
+                  width="180"
                   className="me-2"
                 />
               </div>
@@ -78,7 +78,7 @@ const Detail = () => {
                 <Card.Body className="d-flex flex-column align-items-start">
                   <i className="bi bi-droplet mb-3" style={{ fontSize: "1.6rem", color: "white" }}></i>
                   <Card.Text className="text-white mb-0">Humidity</Card.Text>
-                  <Card.Text className="text-white mb-0">{weather.main?.humidity || "N/A"}%</Card.Text>
+                  <Card.Text className="text-white mb-0 fw-bold">{weather.main?.humidity || "N/A"}%</Card.Text>
                 </Card.Body>
               </Card>
               <Card
@@ -91,7 +91,7 @@ const Detail = () => {
                 <Card.Body className="d-flex flex-column align-items-start">
                   <i className="bi bi-wind mb-3" style={{ fontSize: "1.6rem", color: "white" }}></i>
                   <Card.Text className="text-white mb-0">Wind Speed</Card.Text>
-                  <Card.Text className="text-white mb-0">{weather.wind?.speed || "N/A"} km/h</Card.Text>
+                  <Card.Text className="text-white mb-0 fw-bold">{weather.wind?.speed || "N/A"} km/h</Card.Text>
                 </Card.Body>
               </Card>
               <Card
@@ -104,7 +104,7 @@ const Detail = () => {
                 <Card.Body className="d-flex flex-column align-items-start">
                   <i className="bi bi-thermometer-half mb-3" style={{ fontSize: "1.6rem" }}></i>{" "}
                   <Card.Text className="text-white mb-0">Min Temperature</Card.Text>
-                  <Card.Text className="text-white mb-0">{Math.round(weather.main?.temp_min || 0)}°C</Card.Text>
+                  <Card.Text className="text-white mb-0 fw-bold">{Math.round(weather.main?.temp_min || 0)}°C</Card.Text>
                 </Card.Body>
               </Card>
               <Card
@@ -117,32 +117,36 @@ const Detail = () => {
                 <Card.Body className="d-flex flex-column align-items-start">
                   <i className="bi bi-thermometer-sun mb-3" style={{ fontSize: "1.6rem" }}></i>{" "}
                   <Card.Text className="text-white mb-0">Max Temperature</Card.Text>
-                  <Card.Text className="text-white mb-0">{Math.round(weather.main?.temp_max || 0)}°C</Card.Text>
+                  <Card.Text className="text-white mb-0 fw-bold">{Math.round(weather.main?.temp_max || 0)}°C</Card.Text>
                 </Card.Body>
               </Card>
             </div>
           </Col>
         </Row>
-
         <Col sm={12} md={6} className="second-col mt-5 mb-5 p-4">
-          <Card className="mb-4 rounded bg-transparent border-0">
+          <Card className="mb-4 rounded shadow bg-transparent border-0">
             <Card.Body>
-              <Card.Title className="text-center text-white mb-4 fw-bold">Forecast for the Next 5 Days</Card.Title>
+              <Card.Title className="text-center text-white mb-4 fw-bold fs-4">Forecast for the Next 5 Days</Card.Title>
               <ListGroup variant="flush">
                 {forecast.slice(0, 5).map((day, i) => (
-                  <ListGroup.Item key={i} className="rounded bg-transparent border-0">
-                    <div className="d-flex align-items-center pt-4">
+                  <ListGroup.Item key={i} className="rounded bg-dark bg-opacity-50 mb-3 border-0">
+                    <div className="d-flex align-items-center justify-content-between pt-3">
                       <img
                         src={getWeatherIcon(day.weather[0].icon)}
                         alt={day.weather[0].description}
-                        width="40"
+                        width="50"
                         className="me-3"
                       />
-                      <div>
-                        <h6 className="text-white mb-1">Day {i + 1}</h6>
+                      <div className="flex-grow-1">
+                        <h6 className="text-white mb-1">{`Day ${i + 1}`}</h6>
                         <p className="text-white mb-0">
                           {Math.round(day.main.temp)}°C - {day.weather[0].description}
                         </p>
+                      </div>
+                      <div className="text-white fw-bold">
+                        <p className="mb-0">{Math.round(day.main.temp)}°C</p>
+                        <p className="mb-0">Min: {Math.round(day.main.temp_min)}°C</p>
+                        <p className="mb-0">Max: {Math.round(day.main.temp_max)}°C</p>
                       </div>
                     </div>
                   </ListGroup.Item>

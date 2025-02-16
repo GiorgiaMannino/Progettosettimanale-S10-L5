@@ -55,7 +55,7 @@ const SearchBar = ({ changeCity }) => {
       <Form.Control
         className="mt-4 ps-5"
         type="text"
-        placeholder="Search for a city..."
+        placeholder="Search for a city"
         value={city}
         onChange={(e) => setCity(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && fetchWeather()}
