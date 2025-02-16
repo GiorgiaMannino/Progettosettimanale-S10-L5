@@ -25,8 +25,21 @@ body {
 .navbar .nav-link:hover {
   color: lightgray !important;
 }
+.cardhover {
+  transition: transform 0.3s ease;
+  background-color: rgba(0, 4, 255, 0.07);
+}
+
+.cardhover {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
 
 .cardhover:hover {
   transform: scale(1.05);
-  transition: transform 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.055);
+  cursor: pointer;
+}
+
+.placeholder-white::placeholder {
+  color: white !important;
 }

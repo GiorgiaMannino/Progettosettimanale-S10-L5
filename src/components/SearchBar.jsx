@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form } from "react-bootstrap";
+import { InputGroup, FormControl } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 const SearchBar = ({ changeCity }) => {
@@ -18,14 +18,14 @@ const SearchBar = ({ changeCity }) => {
       if (location) {
         const { lat, lon } = location;
 
-        // dati giornata corrente
+        // Dati giornata corrente
         const weatherCityResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
         );
         const weatherCity = await weatherCityResponse.json();
         console.log("weatherCity:", weatherCity);
 
-        // dati dei prossimi giorni
+        // Dati dei prossimi giorni
         const forecastCityResponse = await fetch(
           `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=bb5d1147afc96159e576456b97bf104c&units=metric`
         );
@@ -52,25 +52,32 @@ const SearchBar = ({ changeCity }) => {
 
   return (
     <div style={{ position: "relative" }}>
-      <h4 className="mb-4 text-white ">Pick Location</h4>
-      <Form.Control
-        className="mt-4 ps-5"
-        type="text"
-        placeholder="Search"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        onKeyDown={(e) => e.key === "Enter" && fetchWeather()}
-      />
-      <i
-        className="bi bi-search"
-        onClick={fetchWeather}
-        style={{
-          position: "absolute",
-          left: "10px",
-          top: "50%",
-          transform: "translateY(-50%)",
-        }}
-      ></i>
+      <h4 className="mb-4 text-white text-center">Pick Location</h4>
+      <InputGroup className="mt-4 cardhover">
+        <InputGroup.Text
+          style={{
+            backgroundColor: "rgba(0, 4, 255, 0.07)",
+            border: "none",
+            borderRadius: "0.25rem",
+          }}
+        >
+          <i className="bi bi-search" style={{ fontSize: "1rem", color: "white" }}></i>
+        </InputGroup.Text>
+        <FormControl
+          type="text"
+          placeholder="Search"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && fetchWeather()}
+          className="placeholder-white"
+          style={{
+            backgroundColor: "rgba(0, 4, 255, 0.07)",
+            border: "none",
+            borderRadius: "0.25rem",
+            color: "white",
+          }}
+        />
+      </InputGroup>
     </div>
   );
 };
